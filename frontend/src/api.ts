@@ -1,0 +1,3 @@
+import type { AdminDocument, PublicDocument } from '../../shared/types';
+export async function api<T>(url:string, init?:RequestInit):Promise<T>{ const token=localStorage.getItem('admin_token'); const r=await fetch(url,{...init,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{ }),...(init?.headers||{})}}); const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j?.error?.message||'Request failed'); return j; }
+export const listDocuments=(q:Record<string,string|number|undefined>)=>api<{data:PublicDocument[];pagination:{page:number;pageSize:number;total:number}}>(`/api/documents?${new URLSearchParams(Object.entries(q).filter(([,v])=>v!==undefined).map(([k,v])=>[k,String(v)]) )}`);

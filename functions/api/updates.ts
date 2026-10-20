@@ -1,0 +1,2 @@
+import {db} from '../_lib/supabase'; import {json,fail} from '../_lib/http'; import type {Ctx} from '../_lib/types';
+export const onRequestGet=async({env}:Ctx)=>{const {data,error}=await db(env).from('updates').select('id,title,content,kind,created_at,updated_at').eq('is_published',true).order('created_at',{ascending:false}).limit(12); if(error)return fail('database_error','Unable to load updates',500); return json({data:data||[]})};

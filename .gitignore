@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Environment files (keep .env.example)
+.env
+.env.local
+.env.*.local
+.dev.vars
+
+# Build output (optional - remove if you want to commit dist)
+# dist/
+
+# Logs
+*.log
+.manage/logs/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Cloudflare
+.wrangler/

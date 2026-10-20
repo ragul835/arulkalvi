@@ -1,0 +1,8 @@
+name = "arulkalvi-pdf-library"
+compatibility_date = "2026-10-20"
+pages_build_output_dir = "dist"
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "arulkalvi-pdfs"
+[vars]
+MAX_FILE_SIZE = "20971520"

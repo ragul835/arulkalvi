@@ -1,0 +1,4 @@
+import { z } from 'zod';
+export const listQuery = z.object({ search:z.string().trim().max(120).optional().default(''), class:z.string().trim().max(80).optional(), subject:z.string().trim().max(80).optional(), year:z.string().trim().max(20).optional(), page:z.coerce.number().int().min(1).max(10000).default(1), pageSize:z.coerce.number().int().min(1).max(50).default(12) });
+export const documentInput = z.object({ title:z.string().trim().min(2).max(180), description:z.string().trim().max(2000).nullable().optional(), class_name:z.string().trim().min(1).max(80), subject:z.string().trim().min(1).max(80), academic_year:z.string().trim().min(4).max(20), slug:z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(), is_published:z.boolean().optional() });
+export const slugify=(s:string)=>s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,120)||'document';

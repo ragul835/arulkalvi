@@ -1,0 +1,4 @@
+import {createClient} from '@supabase/supabase-js'; import type {Env} from './types';
+export const db=(env:Env)=>createClient(env.SUPABASE_URL,env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+export const anon=(env:Env)=>createClient(env.SUPABASE_URL,env.SUPABASE_ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+export async function requireAdmin(req:Request,env:Env){const h=req.headers.get('authorization'); if(!h?.startsWith('Bearer ')) return null; const token=h.slice(7); if(env.APP_ENV==='development'&&env.DEV_AUTH_BYPASS==='true'&&token==='dev-admin-token') return {id:env.ADMIN_USER_ID||'dev-admin'} as any; const {data,error}=await anon(env).auth.getUser(token); if(error||!data.user||data.user.id!==env.ADMIN_USER_ID) return null; return data.user;}
